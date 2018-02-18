@@ -27,6 +27,8 @@ def choose_action(state, q_table):
          # replace argmax to idxmax as argmax means a different function in newer version of pandas
     return action_name
 
+# 做出行为后, 环境也要给我们的行为一个反馈, 反馈出下个 state (S_) 和 在上个 state (S) 做出 action (A) 所得到的 reward (R).
+# 这里定义的规则就是, 只有当 o 移动到了 T, 探索者才会得到唯一的一个奖励, 奖励值 R=1, 其他情况都没有奖励.
 def get_env_feedback(S,A):
     # This is how agent will interact with the environment
     if A == 'right':  # move right
@@ -62,15 +64,15 @@ def r1():
     q_table = build_q_table(N_STATES,ACTIONS)
     for episode in range(MAX_EPISODES):
         step_counter = 0
-        S = 0
-        is_terminated = False
-        update_env(S,episode,step_counter)
+        S = 0   #  回合初始位置
+        is_terminated = False  # 回合是否结束
+        update_env(S,episode,step_counter) # 环境更新
         while not is_terminated:
             A = choose_action(S,q_table)
             S_, R = get_env_feedback(S,A)
-            q_predict = q_table.loc[S,A]
+            q_predict = q_table.loc[S,A] # 估算的（s-A）值
             if S_ != 'terminal':
-                q_target = R + GAMMA* q_table.iloc[S_,:].max() # next state is not terminal
+                q_target = R + GAMMA* q_table.iloc[S_,:].max() #  实际的(状态-行为)值 (回合没结束)
             else:
                 q_target = R # next state is terminal
                 is_terminated = True
