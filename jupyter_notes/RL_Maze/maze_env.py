@@ -80,21 +80,29 @@ class Maze(tk.Tk, object):
         return self.canvas.coords(self.rect)
 
     def step(self,action):
+        reward = 0.
         s = self.canvas.coords(self.rect)
         base_action = np.array([0,0])
         if action == 0:   # up
             if s[1] > UNIT:
                 base_action[1] -= UNIT
+            else:
+                reward = -0.5
         elif action == 1:   # down
             if s[1] < (MAZE_H - 1) * UNIT:
                 base_action[1] += UNIT
+            else:
+                reward = -0.5
         elif action == 2:   # right
             if s[0] < (MAZE_W - 1) * UNIT:
                 base_action[0] += UNIT
+            else:
+                reward = -0.5
         elif action == 3:   # left
             if s[0] > UNIT:
                 base_action[0] -= UNIT
-
+            else:
+                reward = -0.5
         self.canvas.move(self.rect, base_action[0],base_action[1]) # move agent
 
         s_ = self.canvas.coords(self.rect)  # next state
@@ -109,7 +117,7 @@ class Maze(tk.Tk, object):
             done = True
             s_ = 'terminal'
         else:
-            reward = 0
+            # reward = 0
             done = False
 
         return s_, reward, done

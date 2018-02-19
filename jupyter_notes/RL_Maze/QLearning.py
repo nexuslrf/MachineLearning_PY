@@ -12,7 +12,7 @@ from RL_brain import QLearningTable
 def update():
     cnt_success = 0
     cnt_failure = 0
-    for episode in range(20):
+    for episode in range(50):
         # print(RL.q_table,'\n')
         # initial observation
         observation = env.reset()
