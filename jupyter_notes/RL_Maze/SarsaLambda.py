@@ -1,5 +1,5 @@
 from maze_env import Maze
-from RL_brain import SarsaTable
+from RL_brain import SarsaLambdaTable
 
 def update():
     cnt_success = 0
@@ -11,6 +11,9 @@ def update():
         # RL choose action based on observation 
         # Differ from Qlearning
         action = RL.choose_action(str(observation))
+
+        # initial all zero eligibility trace
+        RL.eligibility_trace *= 0
 
         while True:
             env.render()
@@ -41,8 +44,8 @@ def update():
 
 
 if __name__ == "__main__":
-    env = Maze('Sarsa')
-    RL = SarsaTable(actions = list(range(env.n_actions)),e_greedy=0.9)
+    env = Maze('SarsaLambda')
+    RL = SarsaLambdaTable(actions = list(range(env.n_actions)),e_greedy=0.9)
 
     env.after(50,update)
     env.mainloop()

@@ -104,3 +104,28 @@ Sarsa 是一种单步on-policy更新法, 在环境中每走一步, 更新一次�
 
 ![Sarsa-lambda](https://morvanzhou.github.io/static/results/reinforcement-learning/3-3-1.png)
 
+#### Implement details:
+
+通过一些标记来记录整条路径上每一个状态的重要性
+
+```
+# method 1:
+self.eligibility_trace.ix[s, a] += 1
+
+# method 2:
+self.eligibility_trace.ix[s, :] *= 0
+self.eligibility_trace.ix[s, a] = 1
+
+```
+
+他们两的不同之处可以用这张图来概括:
+
+[![Sarsa-lambda](https://morvanzhou.github.io/static/results/reinforcement-learning/3-3-2.png)](https://morvanzhou.github.io/static/results/reinforcement-learning/3-3-2.png)
+
+这是针对于一个 state-action 值按经历次数的变化. 最上面是经历 state-action 的时间点, 第二张图是使用这种方式所带来的 “不可或缺性值”:
+
+`self.eligibility_trace.ix[s, a] += 1`
+
+下面图是使用这种方法带来的 “不可或缺性值”:
+
+`self.eligibility_trace.ix[s, :] *= 0; self.eligibility_trace.ix[s, a] = 1`

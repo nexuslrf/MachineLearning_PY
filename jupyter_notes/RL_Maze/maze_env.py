@@ -17,14 +17,13 @@ MAZE_H = 4  # grid height
 MAZE_W = 4  # grid width
 
 class Maze(tk.Tk, object):
-    def __init__(self):
+    def __init__(self,title_name='maze'):
         super().__init__()                 # to see class method super(): www.runoob.com/python/python-func-super.html
         self.action_space = ['u','d','l','r']
         self.n_actions = len(self.action_space)
-        self.title('sb_maze')
+        self.title(title_name)
         self.geometry('{0}x{1}'.format(MAZE_H*UNIT,MAZE_W*UNIT))
         self._build_maze()
-
     def _build_maze(self):
         self.canvas = tk.Canvas(self, bg ='white',
             height = MAZE_H*UNIT,width= MAZE_W*UNIT)

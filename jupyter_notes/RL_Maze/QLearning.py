@@ -48,8 +48,8 @@ def update():
     env.destroy()
 
 if __name__ == "__main__":
-    env = Maze()
-    RL = QLearningTable(actions = list(range(env.n_actions)))
+    env = Maze('QLearning')
+    RL = QLearningTable(actions = list(range(env.n_actions)),e_greedy=0.9)
 
     env.after(50,update)
     env.mainloop()
