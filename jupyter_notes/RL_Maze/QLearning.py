@@ -8,7 +8,6 @@ All other states:       ground      [reward = 0].
 
 from maze_env import Maze
 from RL_brain import QLearningTable
-
 def update():
     cnt_success = 0
     cnt_failure = 0
