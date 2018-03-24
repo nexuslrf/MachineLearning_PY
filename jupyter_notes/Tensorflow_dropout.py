@@ -17,7 +17,7 @@ def add_layer2(inputs,in_size,out_size,layer_name,activation_function=None):
     tf.summary.histogram(layer_name+'/outputs',outputs)
     return outputs
 
-keep_prob = tf.placeholder(tf.float32) #在dropout中所保留的神经元的比例
+keep_prob = tf.placeholder(tf.float32) # 在dropout中所保留的神经元的比例
 xs = tf.placeholder(tf.float32,[None,64])
 ys = tf.placeholder(tf.float32,[None,10])
 

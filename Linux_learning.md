@@ -156,3 +156,80 @@ print("This is a Python script!")
 > g++ f1.cpp -o ans.out
 
 `-o` 是输出(out) 的意思
+
+## 压缩
+
+**ZIP** 
+zip是比较常用的文档压缩格式，最大的有点是跨平台，缺点是支持的压缩率不是很高。 
+压缩
+
+```
+#zip -r studio.zip directory_to_compress1
+```
+
+解压
+
+```
+#unzip studio.zip1
+```
+
+**TAR** 
+好处是只消耗非常少的CPU及时间打包，只是一个打包工具，并不负责压缩。
+
+```
+#tar -cvf studio.tar directory_to_compress1
+```
+
+解包 
+到当前目录下
+
+```
+#tar -xvf studio.tar1
+```
+
+到指定目录下
+
+```
+#tar -xvf studio.tar -C /tmp/extract/1
+```
+
+**TAR.GZ** 
+压缩时不会占用太多的CPU，就可以得到一个非常理想的压缩率。 
+压缩
+
+```
+#tar -zcvf studio.tar.gz directory_to_compress1
+```
+
+解压 
+到当前目录
+
+```
+#tar -zxvf studio.tar.gz1
+```
+
+到指定目录
+
+```
+#tar -zxvf studio.tar.gz  -C /tmp/extract/1
+```
+
+**TAR.BZ2** 
+这种压缩格式是这几种方式中压缩率最好的
+
+```
+# tar -jcvf studio.tar.bz2 directory_to_compress1
+```
+
+解压 
+到当前目录
+
+```
+# tar -jxvf studio.tar.bz21
+```
+
+到指定目录
+
+```
+# tar -jxvf studio.tar.bz2 -C /tmp/extract/
+```
